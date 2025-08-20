@@ -1,0 +1,73 @@
+@use "sass:math";
+@use "@styles/base/mixins.scss" as *;
+
+// Connection of general remote fonts (Google fonts)
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+
+// Global reset
+@import "./libs/reset.css";
+
+body {
+    min-width: #{$minWidth}px;
+    color: $mainColor;
+    font-family: $fontFamily;
+    font-size: #{$fontSize}px;
+}
+
+#root {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: clip;
+    > main {
+        flex: 1 1 auto;
+    }
+    > * {
+        min-width: 0;
+    }
+}
+
+@if ($responsiveType==1) {
+    // sensitive
+    [class*="__container"] {
+        @if ($maxWidthContainer>0) {
+            max-width: #{$containerWidth}px;
+            margin: 0 auto;
+        }
+        @if ($containerPadding>0) {
+            @if ($maxWidthContainer>0) {
+                padding-left: #{math.div($containerPadding, 2)}px;
+                padding-right: #{math.div($containerPadding, 2)}px;
+            } @else {
+                @include adaptiveValue("padding-left", math.div($containerPadding, 2), 15);
+                @include adaptiveValue("padding-right", math.div($containerPadding, 2), 15);
+            }
+        }
+    }
+} @else {
+    // Break-poin
+    [class*="__container"] {
+        margin: 0 auto;
+        @if ($maxWidthContainer>0) {
+            max-width: #{$containerWidth}px;
+        } @else {
+            @if ($containerPadding>0) {
+                padding-left: #{math.div($containerPadding, 2)}px;
+                padding-right: #{math.div($containerPadding, 2)}px;
+            }
+        }
+        @media (max-width: toEm($pc)) {
+            max-width: 970px;
+        }
+        @media (max-width: toEm($tablet)) {
+            max-width: 750px;
+        }
+        @media (max-width: toEm($mobile)) {
+            max-width: none;
+            @if ($containerPadding>0 and $maxWidthContainer>0) {
+                padding-left: #{math.div($containerPadding, 2)}px;
+                padding-right: #{math.div($containerPadding, 2)}px;
+            }
+        }
+    }
+}

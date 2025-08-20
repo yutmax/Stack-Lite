@@ -1,0 +1,35 @@
+// Setting up styles by default
+
+$fontFamily: "Roboto"; // default font
+$fontSize: 16; // default font size
+
+// Basic colors
+$mainColor: #000; // The default font color
+
+// Setting up adaptive grid
+
+// minimum page width
+$minWidth: 320;
+// The width of the canvas (layout)
+$maxWidth: 1920;
+// The width of the restrictive container (0 = no restriction)
+$maxWidthContainer: 0;
+// General indentation from a container
+// (30 = 15px left and right, 0 = no retreat)
+$containerPadding: 30;
+
+// Width of the First Breikpoint
+$containerWidth: $maxWidthContainer + $containerPadding;
+
+// Break-pint
+$pc: $containerWidth; // PC, laptops, some tablets in horizontal position
+$tablet: 991.98; // tablets, some phones in horizontal position
+$mobile: 767.98; // Phones L
+$mobileSmall: 479.98; // phones S
+
+// Type of adaptive:
+// 1 = responsiveness (the container does not have bro
+// 2 = by break-poin (the container changes its width by break-point)
+$responsiveType: 1;
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
