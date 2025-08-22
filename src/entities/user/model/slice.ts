@@ -1,4 +1,4 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 type UserState = {
   isAuth: boolean;
@@ -19,6 +19,9 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     login(state, action: PayloadAction<{ username: string; role: string; id: number }>) {
+      console.log(action.payload.username);
+      console.log(action.payload.id);
+      console.log(action.payload.role);
       state.isAuth = true;
       state.username = action.payload.username;
       state.role = action.payload.role;
@@ -31,6 +34,32 @@ const userSlice = createSlice({
       state.id = null;
     },
   },
+});
+
+export const registerUser = createAsyncThunk("user/register", async (data: { username: string; password: string }) => {
+  const response = await fetch("https://codelang.vercel.app/api/register", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Registration failed");
+  }
+  return await response.json();
+});
+
+export const loginUser = createAsyncThunk("user/login", async (data: { username: string; password: string }) => {
+  const response = await fetch("https://codelang.vercel.app/api/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Login failed");
+  }
+  return await response.json();
 });
 
 export const { login, logout } = userSlice.actions;
