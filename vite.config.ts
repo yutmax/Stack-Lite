@@ -19,7 +19,7 @@ export default defineConfig({
         // Make SCSS variables/mixins available everywhere without manual @use
         // Adjust the path if you keep your styles in a different folder
         // Inject only variables to avoid circular imports when compiling mixins.scss itself
-        additionalData: `@use "@styles/settings.scss" as *;`,
+        additionalData: `@use "@styles/settings.scss" as *; @use "@styles/base/mixins.scss" as *;`,
       },
     },
   },

@@ -1,11 +1,11 @@
 @use "sass:math";
 @use "@styles/base/mixins.scss" as *;
 
-// Connection of general remote fonts (Google fonts)
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
-
 // Global reset
 @import "./libs/reset.css";
+
+// Connection of general remote fonts (Google fonts)
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
 
 body {
     min-width: #{$minWidth}px;
@@ -70,4 +70,38 @@ body {
             }
         }
     }
+}
+
+// General styles ========================================================================================================================================================
+
+.link {
+    position: relative;
+    color: $blueColor;
+
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -10px;
+        width: 100%;
+        height: toRem(2);
+        background-color: $blueColor;
+        opacity: 0;
+        transition:
+            bottom 0.3s,
+            opacity 0.3s;
+    }
+    @media (any-hover: hover) {
+        &:hover {
+            &::after {
+                bottom: -2px;
+                opacity: 1;
+            }
+        }
+    }
+}
+.auth-redirect {
+    display: flex;
+    justify-self: center;
+    column-gap: toRem(10);
 }

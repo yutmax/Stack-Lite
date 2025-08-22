@@ -3,7 +3,7 @@ import { AuthForm } from "../../shared/ui/AuthForm/AuthForm";
 import { Link } from "react-router-dom";
 import { AuthPage } from "../../shared/ui/AuthPage/AuthPage";
 
-const RegisterPage = () => {
+const LoginPage = () => {
   const [values, setValues] = useState({ username: "", password: "", confirm: "" });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<{ [k: string]: string }>({});
@@ -15,24 +15,23 @@ const RegisterPage = () => {
   return (
     <AuthPage>
       <AuthForm
-        title="Sign up"
+        title="Sign in"
         fields={[
           { name: "username", label: "Username", autoComplete: "off" },
           { name: "password", label: "Password", type: "password" },
-          { name: "confirm", label: "Confirm Password", type: "password" },
         ]}
         values={values}
         errors={errors}
         formError={formError}
         isLoading={loading}
-        submitLabel="Create account"
+        submitLabel="Enter the account"
         onChange={onChange}
         onSubmit={onSubmit}
         footer={
           <div className="auth-redirect">
-            <span>Already have an account?</span>
-            <Link className="auth-redirect__link link" to="/login">
-              Sign in
+            <span>You have no account?</span>
+            <Link className="auth-redirect__link link" to="/register">
+              Sign up
             </Link>
           </div>
         }
@@ -41,4 +40,4 @@ const RegisterPage = () => {
   );
 };
 
-export default RegisterPage;
+export default LoginPage;

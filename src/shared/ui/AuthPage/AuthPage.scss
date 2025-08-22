@@ -1,0 +1,13 @@
+.auth-page {
+    min-height: 100svh;
+    padding: toRem(20) toRem(0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__container {
+        max-width: toRem(500);
+        width: 100%;
+        display: grid;
+        justify-items: center;
+    }
+}
