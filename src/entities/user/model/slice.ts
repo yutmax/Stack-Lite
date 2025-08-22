@@ -19,9 +19,6 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     login(state, action: PayloadAction<{ username: string; role: string; id: number }>) {
-      console.log(action.payload.username);
-      console.log(action.payload.id);
-      console.log(action.payload.role);
       state.isAuth = true;
       state.username = action.payload.username;
       state.role = action.payload.role;
@@ -37,7 +34,7 @@ const userSlice = createSlice({
 });
 
 export const registerUser = createAsyncThunk("user/register", async (data: { username: string; password: string }) => {
-  const response = await fetch("https://codelang.vercel.app/api/register", {
+  const response = await fetch("/api/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -50,7 +47,7 @@ export const registerUser = createAsyncThunk("user/register", async (data: { use
 });
 
 export const loginUser = createAsyncThunk("user/login", async (data: { username: string; password: string }) => {
-  const response = await fetch("https://codelang.vercel.app/api/auth/login", {
+  const response = await fetch("/api/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),

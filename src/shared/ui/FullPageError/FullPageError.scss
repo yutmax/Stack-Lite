@@ -1,0 +1,12 @@
+.full-page-error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100svh;
+    &__text {
+        text-align: center;
+        color: red;
+        @include adaptiveValue("font-size", 32, 20);
+    }
+}
