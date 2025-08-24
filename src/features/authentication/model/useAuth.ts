@@ -5,6 +5,7 @@ import { login } from "../../../entities/user/model/slice";
 export const useAuth = () => {
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -14,6 +15,10 @@ export const useAuth = () => {
       credentials: "include",
     })
       .then(async (res) => {
+        if (res.status === 401) {
+          return null;
+        }
+
         if (!res.ok) {
           const text = await res.text();
           let message = `HTTP error! status: ${res.status}`;
