@@ -5,6 +5,9 @@ import { AuthPage } from "../../shared/ui/AuthPage/AuthPage";
 import { registerUser } from "../../entities/user/model/slice";
 import { useAppDispatch } from "../../shared/lib/hooks/storeHooks";
 
+import LockOutlineIcon from "@mui/icons-material/LockOutline";
+import PersonIcon from "@mui/icons-material/Person";
+
 const RegisterPage = () => {
   const [values, setValues] = useState({ username: "", password: "", confirm: "" });
   const [loading, setLoading] = useState(false);
@@ -53,9 +56,9 @@ const RegisterPage = () => {
       <AuthForm
         title="Sign up"
         fields={[
-          { name: "username", label: "Username", autoComplete: "off" },
-          { name: "password", label: "Password", type: "password" },
-          { name: "confirm", label: "Confirm Password", type: "password" },
+          { name: "username", label: "Username", autoComplete: "off", fieldIcon: <PersonIcon color="action" /> },
+          { name: "password", label: "Password", type: "password", fieldIcon: <LockOutlineIcon color="action" /> },
+          { name: "confirm", label: "Confirm Password", type: "password", fieldIcon: <LockOutlineIcon color="action" /> },
         ]}
         values={values}
         errors={errors}

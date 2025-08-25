@@ -6,6 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../shared/lib/hooks/storeHooks";
 import { login, loginUser } from "../../entities/user/model/slice";
 
+import LockOutlineIcon from "@mui/icons-material/LockOutline";
+import PersonIcon from "@mui/icons-material/Person";
+
 const LoginPage = () => {
   const [values, setValues] = useState({ username: "", password: "" });
   const [loading, setLoading] = useState(false);
@@ -54,8 +57,8 @@ const LoginPage = () => {
       <AuthForm
         title="Sign in"
         fields={[
-          { name: "username", label: "Username", autoComplete: "on" },
-          { name: "password", label: "Password", type: "password" },
+          { name: "username", label: "Username", autoComplete: "on", fieldIcon: <PersonIcon color="action" /> },
+          { name: "password", label: "Password", type: "password", fieldIcon: <LockOutlineIcon color="action" /> },
         ]}
         values={values}
         errors={errors}

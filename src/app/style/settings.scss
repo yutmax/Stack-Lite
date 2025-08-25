@@ -4,8 +4,10 @@ $fontFamily: "Roboto"; // default font
 $fontSize: 16; // default font size
 
 // Basic colors
-$mainColor: #000; // The default font color
-$mainBackgroundColor: rgb(15, 18, 20);
+$mainColor: #222222; // The default font color
+$secondaryTextColor: #888888; // Secondary text color
+$cardBackgroundColor: #ffffff;
+$mainBackgroundColor: #f5f5f5;
 $blueColor: #1976d2;
 
 // Setting up adaptive grid

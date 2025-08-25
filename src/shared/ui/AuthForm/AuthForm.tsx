@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Alert, Button, TextField, CircularProgress } from "@mui/material";
+import { Alert, Button, TextField, CircularProgress, InputAdornment } from "@mui/material";
 import "./AuthForm.scss";
 
 export type AuthField = {
@@ -7,6 +7,7 @@ export type AuthField = {
   label: string;
   type?: string;
   autoComplete?: string;
+  fieldIcon?: ReactNode;
 };
 
 type AuthFormProps = {
@@ -35,7 +36,27 @@ export const AuthForm = ({ title, fields, values, errors, formError, isLoading, 
       {formError ? <Alert severity="error">{formError}</Alert> : null}
 
       {fields.map((field) => (
-        <TextField key={field.name} label={field.label} type={field.type || "text"} name={field.name} value={values[field.name] ?? ""} onChange={handleFieldChange(onChange, field.name)} error={Boolean(errors?.[field.name])} helperText={errors?.[field.name]} autoComplete={field.autoComplete} fullWidth />
+        <TextField
+          key={field.name}
+          label={field.label}
+          type={field.type || "text"}
+          name={field.name}
+          value={values[field.name] ?? ""}
+          onChange={handleFieldChange(onChange, field.name)}
+          error={Boolean(errors?.[field.name])}
+          helperText={errors?.[field.name]}
+          autoComplete={field.autoComplete}
+          fullWidth
+          slotProps={
+            field.fieldIcon
+              ? {
+                  input: {
+                    endAdornment: field.fieldIcon,
+                  },
+                }
+              : undefined
+          }
+        />
       ))}
 
       {isLoading ? (
