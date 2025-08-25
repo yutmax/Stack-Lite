@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AuthForm } from "../../shared/ui/AuthForm/AuthForm";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthPage } from "../../shared/ui/AuthPage/AuthPage";
-import { registerUser } from "../../entities/user/model/slice";
+import { registerUser } from "../../features/authentication/model/registerThunk";
 import { useAppDispatch } from "../../shared/lib/hooks/storeHooks";
 
 import LockOutlineIcon from "@mui/icons-material/LockOutline";

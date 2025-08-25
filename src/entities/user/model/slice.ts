@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 type UserState = {
   isAuth: boolean;
@@ -31,32 +31,6 @@ const userSlice = createSlice({
       state.id = null;
     },
   },
-});
-
-export const registerUser = createAsyncThunk("user/register", async (data: { username: string; password: string }) => {
-  const response = await fetch("/api/register", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  });
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || "Registration failed");
-  }
-  return await response.json();
-});
-
-export const loginUser = createAsyncThunk("user/login", async (data: { username: string; password: string }) => {
-  const response = await fetch("/api/auth/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  });
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || "Login failed");
-  }
-  return await response.json();
 });
 
 export const { login, logout } = userSlice.actions;

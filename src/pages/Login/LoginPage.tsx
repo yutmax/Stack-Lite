@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { AuthPage } from "../../shared/ui/AuthPage/AuthPage";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../shared/lib/hooks/storeHooks";
-import { login, loginUser } from "../../entities/user/model/slice";
+import { loginUser } from "../../features/authentication/model/loginThunk";
+import { login } from "../../entities/user/model/slice";
 
 import LockOutlineIcon from "@mui/icons-material/LockOutline";
 import PersonIcon from "@mui/icons-material/Person";

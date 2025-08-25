@@ -1,13 +1,13 @@
 import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
-import type { RootState } from "../store/store";
+import { selectIsAuth } from "../../../entities/user/model/selectores";
 
 export function GuestGuard() {
-  const isAuth = useSelector((state: RootState) => state.user.isAuth);
+  const isAuth = useSelector(selectIsAuth);
   return isAuth ? <Navigate to="/" replace /> : <Outlet />;
 }
 
 export function AuthGuard() {
-  const isAuth = useSelector((state: RootState) => state.user.isAuth);
+  const isAuth = useSelector(selectIsAuth);
   return isAuth ? <Outlet /> : <Navigate to="/login" replace />;
 }

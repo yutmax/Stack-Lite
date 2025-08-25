@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Alert, Button, TextField, CircularProgress, InputAdornment } from "@mui/material";
+import { Alert, Button, TextField } from "@mui/material";
 import "./AuthForm.scss";
 
 export type AuthField = {
@@ -59,13 +59,9 @@ export const AuthForm = ({ title, fields, values, errors, formError, isLoading, 
         />
       ))}
 
-      {isLoading ? (
-        <CircularProgress size={32} style={{ margin: "16px auto", display: "block" }} />
-      ) : (
-        <Button type="submit" variant="contained" size="large" disabled={isLoading}>
-          {submitLabel}
-        </Button>
-      )}
+      <Button loading={isLoading} loadingPosition="end" type="submit" variant="contained" size="large" fullWidth>
+        {submitLabel}
+      </Button>
 
       {footer}
     </form>

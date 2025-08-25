@@ -2,13 +2,14 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import RegisterPage from "../../../pages/Register/RegisterPage";
 import LoginPage from "../../../pages/Login/LoginPage";
 import { AuthGuard, GuestGuard } from "./guards";
+import HomePage from "../../../pages/Home/HomePage";
 
 const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<AuthGuard />}>
-          <Route path="/" element={<div>Home Page</div>} />
+          <Route path="/" element={<HomePage />} />
         </Route>
 
         <Route element={<GuestGuard />}>
