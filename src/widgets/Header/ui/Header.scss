@@ -1,0 +1,30 @@
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    padding: toRem(10) toRem(0);
+
+    border-bottom: 1px solid #000000;
+    @media (min-width: toRem($mobile)) {
+        padding: toRem(10) toRem(20);
+    }
+
+    background-color: $blueColor;
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        column-gap: toRem(20);
+    }
+
+    &__title {
+        @include adaptiveValue("font-size", 25, 20);
+        font-weight: 900;
+        letter-spacing: 0.05em;
+        color: $contrastTextColor;
+    }
+    &__link {
+    }
+}

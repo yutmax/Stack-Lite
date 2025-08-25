@@ -3,13 +3,16 @@ import RegisterPage from "../../../pages/Register/RegisterPage";
 import LoginPage from "../../../pages/Login/LoginPage";
 import { AuthGuard, GuestGuard } from "./guards";
 import HomePage from "../../../pages/Home/HomePage";
+import AppLayout from "../../../widgets/Layout/AppLayout";
 
 const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<AuthGuard />}>
-          <Route path="/" element={<HomePage />} />
+          <Route element={<AppLayout />}>
+            <Route path="/" element={<HomePage />} />
+          </Route>
         </Route>
 
         <Route element={<GuestGuard />}>

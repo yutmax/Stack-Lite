@@ -1,0 +1,13 @@
+.app-layout {
+    min-height: 100vh;
+
+    &__content {
+        padding-top: toRem(70);
+        @media (min-width: toRem($tablet)) {
+            transition: margin-left 0.3s;
+            &._with-sidebar {
+                margin-left: toRem(250);
+            }
+        }
+    }
+}

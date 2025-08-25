@@ -99,6 +99,13 @@ body {
             }
         }
     }
+
+    &--white {
+        color: $contrastTextColor;
+        &::after {
+            background-color: $contrastTextColor;
+        }
+    }
 }
 .auth-redirect {
     display: flex;

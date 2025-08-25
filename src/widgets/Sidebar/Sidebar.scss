@@ -1,0 +1,50 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: toRem(250);
+    background-color: $darkBlueColor;
+    padding: toRem(70) toRem(16) toRem(16);
+    height: 100%;
+    transform: translateX(-250px);
+    transition: transform 0.3s;
+    overflow-y: auto;
+
+    @media (max-width: toRem($mobile)) {
+        width: 100%;
+        transform: translateX(-100%);
+    }
+    &._open {
+        transform: translateX(0);
+    }
+
+    &__nav {
+    }
+
+    &__list {
+        display: grid;
+        row-gap: toRem(10);
+    }
+
+    &__item {
+    }
+
+    &__link {
+        padding: toRem(15) toRem(10);
+        border-radius: toRem(8);
+        width: 100%;
+        color: $contrastTextColor;
+        display: flex;
+        align-items: center;
+        column-gap: toRem(10);
+        transition: background-color 0.3s;
+        @media (any-hover: hover) {
+            &:hover {
+                outline: 1px solid rgba(255, 255, 255, 0.2);
+            }
+        }
+        &--active {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    }
+}
