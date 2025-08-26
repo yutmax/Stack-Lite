@@ -1,0 +1,15 @@
+.post-cards {
+    &__title {
+        @include adaptiveValue("font-size", 22, 18);
+        font-weight: 500;
+        &:not(:last-child) {
+            margin-bottom: toRem(15);
+        }
+    }
+
+    &__list {
+        display: grid;
+        justify-content: center;
+        row-gap: toRem(30);
+    }
+}

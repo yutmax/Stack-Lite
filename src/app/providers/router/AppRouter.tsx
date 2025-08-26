@@ -12,6 +12,8 @@ const AppRouter = () => {
         <Route element={<AuthGuard />}>
           <Route element={<AppLayout />}>
             <Route path="/" element={<HomePage />} />
+            <Route path="/account" element={<div>account page</div>} />
+            <Route path="/others" element={<div>Others page</div>} />
           </Route>
         </Route>
 

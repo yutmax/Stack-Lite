@@ -1,0 +1,46 @@
+.post-card {
+    width: 100%;
+    background-color: $cardBackgroundColor;
+    border-radius: toRem(8);
+    overflow: hidden;
+    border: 1px solid $cardBackgroundDarkColor;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        gap: toRem(10);
+        background-color: $cardBackgroundDarkColor;
+        padding: toRem(10);
+        flex-wrap: wrap;
+    }
+
+    &__author {
+        span {
+            font-weight: 700;
+        }
+    }
+
+    &__language {
+        span {
+            font-weight: 700;
+        }
+    }
+
+    &__content {
+        padding: toRem(15);
+    }
+
+    &__controls {
+        border-top: 1px solid $darkBlueColor;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: toRem(10);
+        padding: toRem(10);
+    }
+
+    &__thumb-acitons {
+        display: flex;
+        gap: toRem(5);
+    }
+}

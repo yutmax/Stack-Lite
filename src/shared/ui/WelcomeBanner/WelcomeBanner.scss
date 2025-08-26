@@ -1,0 +1,23 @@
+.welcome-banner {
+    background-color: $cardBackgroundColor;
+    border: 1px solid #e1e4e8;
+    border-radius: toRem(8);
+    padding: toRem(20);
+
+    &:not(:last-child) {
+        margin-bottom: toRem(25);
+    }
+
+    &__title {
+        @include adaptiveValue("font-size", 25, 22);
+        &:not(:last-child) {
+            margin-bottom: toRem(10);
+        }
+        font-weight: 500;
+    }
+
+    &__text {
+        font-size: 16px;
+        color: $secondaryTextColor;
+    }
+}
