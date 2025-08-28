@@ -15,12 +15,13 @@ const PostList = () => {
   const loading = useAppSelector(selectPostsLoading);
   const error = useAppSelector(selectPostsError);
   const meta = useAppSelector(selectPostsMeta);
+  const listLoaded = useAppSelector((s) => s.posts.listLoaded);
 
   useEffect(() => {
-    if (!loading && posts.length === 0) {
-      dispatch(fetchPosts({ page: meta.currentPage || 1, limit: meta.itemsPerPage }));
+    if (!loading && (!listLoaded || posts.length === 0)) {
+      dispatch(fetchPosts({ page: 1, limit: meta.itemsPerPage }));
     }
-  }, [dispatch, loading, posts.length, meta.currentPage, meta.itemsPerPage]);
+  }, [dispatch, loading, listLoaded, posts.length, meta.itemsPerPage]);
 
   return (
     <div className=" post-cards">

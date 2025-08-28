@@ -1,0 +1,15 @@
+.comment {
+    background-color: $cardBackgroundColor;
+    padding: toRem(10);
+    border-radius: toRem(6);
+    display: grid;
+    row-gap: toRem(15);
+    &__author {
+        font-weight: 500;
+        border-bottom: 1px solid $cardBackgroundDarkColor;
+        padding-bottom: toRem(5);
+    }
+    &__content {
+        line-height: 1.4;
+    }
+}

@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchPosts } from "./fetchPosts";
 import { markPost } from "../../../features/post/marks/model/markPost";
+import { fetchPostById } from "./fetchPostById";
 import type { MetaByPost, Post } from "./types";
 
 interface PostsState {
@@ -9,6 +10,7 @@ interface PostsState {
   error: string | null;
   hasMore: boolean;
   meta: MetaByPost;
+  listLoaded: boolean; // fetched list at least once
 }
 
 const initialState: PostsState = {
@@ -23,12 +25,35 @@ const initialState: PostsState = {
     totalPages: 0,
     sortBy: [["createdAt", "DESC"]],
   },
+  listLoaded: false,
 };
 
 const postsSlice = createSlice({
   name: "posts",
   initialState,
-  reducers: {},
+  reducers: {
+    addCommentOptimistic: (state, action) => {
+      const { postId, comment } = action.payload as { postId: string; comment: any };
+      const p = state.posts.find((x) => x.id === postId);
+      if (p) {
+        p.comments = [...p.comments, comment];
+      }
+    },
+    upsertComment: (state, action) => {
+      const { postId, comment, tempId } = action.payload as { postId: string; comment: any; tempId?: string };
+      const p = state.posts.find((x) => x.id === postId);
+      if (!p) return;
+      const replaceIdx = tempId ? p.comments.findIndex((c: any) => c.id === tempId) : p.comments.findIndex((c: any) => c.id === comment.id);
+      if (replaceIdx !== -1) {
+        p.comments[replaceIdx] = comment;
+      } else {
+        // Avoid duplicate if same id already exists
+        if (!p.comments.some((c: any) => c.id === comment.id)) {
+          p.comments = [...p.comments, comment];
+        }
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchPosts.pending, (state) => {
@@ -40,6 +65,7 @@ const postsSlice = createSlice({
         state.posts = action.payload.items ?? [];
         state.meta = action.payload.meta;
         state.hasMore = action.payload.meta.currentPage < action.payload.meta.totalPages;
+        state.listLoaded = true;
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.loading = false;
@@ -69,8 +95,19 @@ const postsSlice = createSlice({
         if (idx !== -1) {
           state.posts[idx] = { ...state.posts[idx], ...updated };
         }
+      })
+      .addCase(fetchPostById.fulfilled, (state, action) => {
+        const { post } = action.payload;
+        const idx = state.posts.findIndex((p) => p.id === post.id);
+        if (idx === -1) {
+          // append detailed post without removing others
+          state.posts.push(post);
+        } else {
+          state.posts[idx] = post;
+        }
       });
   },
 });
 
+export const { addCommentOptimistic, upsertComment } = postsSlice.actions;
 export default postsSlice.reducer;

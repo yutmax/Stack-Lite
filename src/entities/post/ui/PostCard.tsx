@@ -7,15 +7,21 @@ import "./PostCard.scss";
 
 import CommentIcon from "@mui/icons-material/Comment";
 import PostReactionButtons from "../../../features/post/marks/ui/PostReactionButtons";
+import { useNavigate } from "react-router-dom";
 
 type PostCardProps = {
   post: Post;
 };
 
 const PostCard = ({ post }: PostCardProps) => {
+  const navigate = useNavigate();
   const likeCount = post.marks?.filter((m) => m.type === "like").length ?? 0;
   const dislikeCount = post.marks?.filter((m) => m.type === "dislike").length ?? 0;
   const commentsCount = post.comments?.length ?? 0;
+
+  const handleCommentClick = () => {
+    navigate(`/post/${post.id}`);
+  };
 
   return (
     <div className="post-card">
@@ -49,7 +55,9 @@ const PostCard = ({ post }: PostCardProps) => {
         <div className="post-card__thumb-actions">
           <PostReactionButtons postId={post.id} likeCount={likeCount} dislikeCount={dislikeCount} />
         </div>
-        <Button endIcon={<CommentIcon />}>{commentsCount}</Button>
+        <Button onClick={handleCommentClick} endIcon={<CommentIcon />}>
+          {commentsCount}
+        </Button>
       </div>
     </div>
   );

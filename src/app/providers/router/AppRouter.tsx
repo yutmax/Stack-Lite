@@ -4,6 +4,7 @@ import LoginPage from "../../../pages/Login/LoginPage";
 import { AuthGuard, GuestGuard } from "./guards";
 import HomePage from "../../../pages/Home/HomePage";
 import AppLayout from "../../../widgets/Layout/AppLayout";
+import PostPage from "../../../pages/Post/PostPage";
 
 const AppRouter = () => {
   return (
@@ -23,6 +24,7 @@ const AppRouter = () => {
 
         <Route element={<AppLayout />}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/post/:id" element={<PostPage />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" />} />
