@@ -1,12 +1,12 @@
 import { CircularProgress } from "@mui/material";
 import { useEffect } from "react";
-
-import "./PostList.scss";
 import PostCard from "../../../entities/post/ui/PostCard";
 import { selectPosts, selectPostsError, selectPostsLoading, selectPostsMeta } from "../../../entities/post/model/selectors";
 import { useAppDispatch, useAppSelector } from "../../../shared/lib/hooks/storeHooks";
 import { fetchPosts } from "../../../entities/post/model/fetchPosts";
 import { PostPagination } from "../../../features/post/pagination";
+
+import "./PostList.scss";
 
 const PostList = () => {
   const dispatch = useAppDispatch();

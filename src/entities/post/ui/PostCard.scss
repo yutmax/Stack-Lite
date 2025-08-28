@@ -2,7 +2,7 @@
     width: 100%;
     background-color: $cardBackgroundColor;
     border-radius: toRem(8);
-    overflow: hidden;
+    overflow: auto;
     border: 1px solid $cardBackgroundDarkColor;
 
     &__header {
@@ -28,6 +28,8 @@
 
     &__content {
         padding: toRem(15);
+        overflow-x: auto;
+        max-width: 100%;
     }
 
     &__controls {
@@ -43,4 +45,11 @@
         display: flex;
         gap: toRem(5);
     }
+}
+
+.post-card__content pre {
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: pre;
+    box-sizing: border-box;
 }

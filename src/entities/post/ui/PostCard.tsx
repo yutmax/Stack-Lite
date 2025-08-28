@@ -1,10 +1,13 @@
 import { Button } from "@mui/material";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+
+import type { Post } from "../model/types";
+
 import "./PostCard.scss";
 
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import CommentIcon from "@mui/icons-material/Comment";
-import type { Post } from "../model/types";
 
 type PostCardProps = {
   post: Post;
@@ -25,9 +28,26 @@ const PostCard = ({ post }: PostCardProps) => {
           <span>Language:</span> {post.language}
         </div>
       </div>
-      <div className="post-card__content">. Praesentium quaerat error excepturi impedit totam sapiente eos expedita, sint porro et numquam dicta accusamus mollitia alias velit, vel obcaecati molestiae nemo.</div>
+
+      {post.code && (
+        <div className="post-card__content">
+          <SyntaxHighlighter
+            language={post.language?.toLowerCase() || "javascript"}
+            customStyle={{
+              margin: 0,
+              padding: "12px 16px",
+              fontSize: "14px",
+              background: "transparent",
+            }}
+            wrapLongLines={false}
+          >
+            {post.code}
+          </SyntaxHighlighter>
+        </div>
+      )}
+
       <div className="post-card__controls">
-        <div className="post-card__thumb-acitons">
+        <div className="post-card__thumb-actions">
           <Button sx={{ color: "#626262" }} startIcon={<ThumbUpAltIcon />}>
             {likeCount}
           </Button>
