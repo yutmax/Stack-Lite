@@ -3,6 +3,9 @@ import { NavLink } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
 import GroupsIcon from "@mui/icons-material/Groups";
+import TextSnippetIcon from "@mui/icons-material/TextSnippet";
+import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
+import LiveHelpIcon from "@mui/icons-material/LiveHelp";
 
 import "./Sidebar.scss";
 
@@ -25,9 +28,26 @@ const Sidebar = ({ open }: SidebarProps) => {
               <PersonIcon /> <span>My Account</span>
             </NavLink>
           </li>
+
           <li className="sidebar__item">
-            <NavLink to="/others" className={({ isActive }) => (isActive ? "sidebar__link sidebar__link--active" : "sidebar__link")}>
-              <GroupsIcon /> <span>Others</span>
+            <NavLink to="/new-snippet" className={({ isActive }) => (isActive ? "sidebar__link sidebar__link--active" : "sidebar__link")}>
+              <PlaylistAddIcon /> <span>Post snippet</span>
+            </NavLink>
+          </li>
+          <li className="sidebar__item">
+            <NavLink to="/my-snippets" className={({ isActive }) => (isActive ? "sidebar__link sidebar__link--active" : "sidebar__link")}>
+              <TextSnippetIcon /> <span>My snippets</span>
+            </NavLink>
+          </li>
+          <li className="sidebar__item">
+            <NavLink to="/questions" className={({ isActive }) => (isActive ? "sidebar__link sidebar__link--active" : "sidebar__link")}>
+              <LiveHelpIcon /> <span>Questions</span>
+            </NavLink>
+          </li>
+
+          <li className="sidebar__item">
+            <NavLink to="/users" className={({ isActive }) => (isActive ? "sidebar__link sidebar__link--active" : "sidebar__link")}>
+              <GroupsIcon /> <span>Users</span>
             </NavLink>
           </li>
         </ul>

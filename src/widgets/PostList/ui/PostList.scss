@@ -1,4 +1,5 @@
 .post-cards {
+    padding-bottom: toRem(20);
     &__title {
         @include adaptiveValue("font-size", 22, 18);
         font-weight: 500;
@@ -9,7 +10,15 @@
 
     &__list {
         display: grid;
+        grid-template-columns: 1fr;
         justify-content: center;
         row-gap: toRem(30);
+        &:not(:last-child) {
+            margin-bottom: toRem(30);
+        }
+    }
+    &__pagination {
+        display: flex;
+        justify-content: center;
     }
 }
