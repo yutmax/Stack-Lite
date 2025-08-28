@@ -4,12 +4,13 @@ import { useAppDispatch } from "../../../../shared/lib/hooks/storeHooks";
 import { addCommentOptimistic, upsertComment } from "../../../../entities/post/model/slice";
 import { useAppSelector } from "../../../../shared/lib/hooks/storeHooks";
 import { fetchPostById } from "../../../../entities/post/model/fetchPostById";
+import { selectUser } from "../../../../entities/user/model/selectors";
 
 let socket: Socket | null = null;
 
 export function usePostCommentsSocket(postId: string) {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((s) => s.user);
+  const user = useAppSelector(selectUser);
 
   useEffect(() => {
     if (!postId) return;
@@ -32,7 +33,7 @@ export function usePostCommentsSocket(postId: string) {
 
     pollInterval = window.setInterval(() => {
       dispatch(fetchPostById({ id: postId }));
-    }, 5000);
+    }, 10000);
 
     const visHandler = () => {
       if (document.visibilityState === "visible") {

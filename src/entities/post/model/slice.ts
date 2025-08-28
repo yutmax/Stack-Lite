@@ -53,6 +53,12 @@ const postsSlice = createSlice({
         }
       }
     },
+    removeComment: (state, action) => {
+      const { postId, commentId } = action.payload as { postId: string; commentId: string };
+      const p = state.posts.find((x) => x.id === postId);
+      if (!p) return;
+      p.comments = p.comments.filter((c: any) => c.id !== commentId);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -109,5 +115,5 @@ const postsSlice = createSlice({
   },
 });
 
-export const { addCommentOptimistic, upsertComment } = postsSlice.actions;
+export const { addCommentOptimistic, upsertComment, removeComment } = postsSlice.actions;
 export default postsSlice.reducer;

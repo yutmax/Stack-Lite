@@ -12,4 +12,11 @@
     &__content {
         line-height: 1.4;
     }
+    &__own-badge {
+        display: flex;
+        gap: toRem(10);
+        justify-content: flex-end;
+        border-top: 1px solid $cardBackgroundDarkColor;
+        padding-top: toRem(5);
+    }
 }

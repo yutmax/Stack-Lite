@@ -8,6 +8,7 @@ import CommentItem from "../../entities/comment/ui/CommentItem";
 
 import "./PostPage.scss";
 import { Button, TextField } from "@mui/material";
+import { deleteComment } from "../../features/post/comments/model/deleteComment";
 
 const PostPage = () => {
   const { id = "" } = useParams();
@@ -28,6 +29,10 @@ const PostPage = () => {
     setCommentValue("");
   };
 
+  const onDeleteComment = (commentId: string) => {
+    dispatch(deleteComment({ id: commentId, postId: id }));
+  };
+
   return (
     <div className="post-page">
       <div className="post-page__container" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -43,7 +48,7 @@ const PostPage = () => {
           <ul className="post-page__comments-list">
             {post?.comments.map((comment) => (
               <li key={comment.id} className="post-page__comment-item">
-                <CommentItem comment={comment} />
+                <CommentItem comment={comment} onDelete={() => onDeleteComment(comment.id)} />
               </li>
             ))}
           </ul>
