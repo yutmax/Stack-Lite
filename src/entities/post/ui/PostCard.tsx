@@ -5,9 +5,8 @@ import type { Post } from "../model/types";
 
 import "./PostCard.scss";
 
-import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
-import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import CommentIcon from "@mui/icons-material/Comment";
+import PostReactionButtons from "../../../features/post/marks/ui/PostReactionButtons";
 
 type PostCardProps = {
   post: Post;
@@ -48,12 +47,7 @@ const PostCard = ({ post }: PostCardProps) => {
 
       <div className="post-card__controls">
         <div className="post-card__thumb-actions">
-          <Button sx={{ color: "#626262" }} startIcon={<ThumbUpAltIcon />}>
-            {likeCount}
-          </Button>
-          <Button sx={{ color: "#626262" }} startIcon={<ThumbDownAltIcon />}>
-            {dislikeCount}
-          </Button>
+          <PostReactionButtons postId={post.id} likeCount={likeCount} dislikeCount={dislikeCount} />
         </div>
         <Button endIcon={<CommentIcon />}>{commentsCount}</Button>
       </div>

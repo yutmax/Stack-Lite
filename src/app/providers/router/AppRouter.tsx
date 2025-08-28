@@ -11,7 +11,6 @@ const AppRouter = () => {
       <Routes>
         <Route element={<AuthGuard />}>
           <Route element={<AppLayout />}>
-            <Route path="/" element={<HomePage />} />
             <Route path="/account" element={<div>account page</div>} />
             <Route path="/others" element={<div>Others page</div>} />
           </Route>
@@ -20,6 +19,10 @@ const AppRouter = () => {
         <Route element={<GuestGuard />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+        </Route>
+
+        <Route element={<AppLayout />}>
+          <Route path="/" element={<HomePage />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" />} />
