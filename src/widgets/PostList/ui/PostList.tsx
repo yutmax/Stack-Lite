@@ -1,41 +1,26 @@
-import { CircularProgress, Pagination } from "@mui/material";
-import { useEffect, useState, useCallback } from "react";
+import { CircularProgress } from "@mui/material";
+import { useEffect } from "react";
 
 import "./PostList.scss";
 import PostCard from "../../../entities/post/ui/PostCard";
-import { useSelector } from "react-redux";
-import { selectPosts, selectPostsError, selectPostsLoading, selectPostsMeta } from "../../../entities/post/model/selectores";
-import { useAppDispatch } from "../../../shared/lib/hooks/storeHooks";
+import { selectPosts, selectPostsError, selectPostsLoading, selectPostsMeta } from "../../../entities/post/model/selectors";
+import { useAppDispatch, useAppSelector } from "../../../shared/lib/hooks/storeHooks";
 import { fetchPosts } from "../../../entities/post/model/fetchPosts";
+import { PostPagination } from "../../../features/post/pagination";
 
 const PostList = () => {
   const dispatch = useAppDispatch();
 
-  const posts = useSelector(selectPosts);
-  const loading = useSelector(selectPostsLoading);
-  const error = useSelector(selectPostsError);
-  const meta = useSelector(selectPostsMeta);
-
-  const [page, setPage] = useState(meta.currentPage || 1);
+  const posts = useAppSelector(selectPosts);
+  const loading = useAppSelector(selectPostsLoading);
+  const error = useAppSelector(selectPostsError);
+  const meta = useAppSelector(selectPostsMeta);
 
   useEffect(() => {
-    dispatch(fetchPosts({ page, limit: meta.itemsPerPage }));
-  }, [dispatch, page, meta.itemsPerPage]);
-
-  useEffect(() => {
-    if (meta.currentPage !== page) {
-      setPage(meta.currentPage);
+    if (!loading && posts.length === 0) {
+      dispatch(fetchPosts({ page: meta.currentPage || 1, limit: meta.itemsPerPage }));
     }
-  }, [meta.currentPage]);
-
-  const handleChangePage = useCallback(
-    (_event: React.ChangeEvent<unknown>, value: number) => {
-      if (value !== page && !loading) {
-        setPage(value);
-      }
-    },
-    [page, loading]
-  );
+  }, [dispatch, loading, posts.length, meta.currentPage, meta.itemsPerPage]);
 
   return (
     <div className=" post-cards">
@@ -52,11 +37,9 @@ const PostList = () => {
           ))}
       </ul>
 
-      {meta.totalPages > 1 && (
-        <div className="post-cards__pagination">
-          <Pagination count={meta.totalPages} page={page} onChange={handleChangePage} size="small" disabled={loading} />
-        </div>
-      )}
+      <div className="post-cards__pagination">
+        <PostPagination />
+      </div>
     </div>
   );
 };

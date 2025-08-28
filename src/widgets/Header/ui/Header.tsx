@@ -1,7 +1,7 @@
 import { IconButton } from "@mui/material";
 import LogoutButton from "../../../features/authentication/ui/LogoutButton";
 import { useSelector } from "react-redux";
-import { selectIsAuth } from "../../../entities/user/model/selectores";
+import { selectIsAuth } from "../../../entities/user/model/selectors";
 import { Link } from "react-router-dom";
 
 import "./Header.scss";

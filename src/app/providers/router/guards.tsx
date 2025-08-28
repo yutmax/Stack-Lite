@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
-import { selectIsAuth } from "../../../entities/user/model/selectores";
+import { selectIsAuth } from "../../../entities/user/model/selectors";
 
 export function GuestGuard() {
   const isAuth = useSelector(selectIsAuth);

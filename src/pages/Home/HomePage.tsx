@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import WelcomeBanner from "../../shared/ui/WelcomeBanner/WelcomeBanner";
-import { selectUser } from "../../entities/user/model/selectores";
+import { selectUser } from "../../entities/user/model/selectors";
 import PostList from "../../widgets/PostList/ui/PostList";
 
 const HomePage = () => {
