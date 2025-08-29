@@ -1,0 +1,66 @@
+.user-stats {
+    padding: toRem(20);
+    background-color: $cardBackgroundColor;
+    border: 1px solid $cardBackgroundDarkColor;
+    border-radius: toRem(8);
+    max-width: toRem(600);
+    // .user-stats__header
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: toRem(30);
+        margin-bottom: toRem(15);
+    }
+    // .user-stats__awatar-wrapper
+    &__awatar-wrapper {
+        max-width: toRem(120);
+        border-radius: 50%;
+        overflow: hidden;
+        img {
+            width: 100%;
+        }
+    }
+    // .user-stats__person
+    &__person {
+        color: #7e7e7e;
+        font-weight: 500;
+    }
+    // .user-stats__username
+    &__username {
+        color: $mainColor;
+        font-weight: 700;
+        letter-spacing: toRem(0.5);
+        font-size: toRem(22);
+        &:not(:last-child) {
+            margin-bottom: toRem(10);
+        }
+    }
+    // .user-stats__role
+    &__role {
+    }
+    // .user-stats__id
+    &__id {
+    }
+    // .user-stats__divider
+    &__divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.12), transparent);
+        margin-top: -0.25rem;
+        &:not(:last-child) {
+            margin-bottom: toRem(20);
+        }
+    }
+    &__items {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: toRem(15);
+        &:not(:last-child) {
+            margin-bottom: toRem(20);
+        }
+    }
+    // .user-stats__actions
+    &__actions {
+        display: flex;
+        gap: toRem(10);
+    }
+}

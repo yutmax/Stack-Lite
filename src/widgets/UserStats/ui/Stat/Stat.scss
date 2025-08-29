@@ -1,0 +1,17 @@
+.stat {
+    padding: toRem(16);
+    background-color: $mainBackgroundColor;
+    border-radius: toRem(8);
+    border: 1px solid #dddddd;
+    display: grid;
+    row-gap: toRem(8);
+    justify-content: center;
+    text-align: center;
+    &__value {
+        font-size: toRem(20);
+    }
+    &__label {
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+}

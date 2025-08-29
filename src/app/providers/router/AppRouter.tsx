@@ -3,8 +3,9 @@ import RegisterPage from "../../../pages/Register/RegisterPage";
 import LoginPage from "../../../pages/Login/LoginPage";
 import { AuthGuard, GuestGuard } from "./guards";
 import HomePage from "../../../pages/Home/HomePage";
-import AppLayout from "../../../widgets/Layout/AppLayout";
+import AppLayout from "../../../widgets/Layout/ui/AppLayout";
 import PostPage from "../../../pages/Post/PostPage";
+import AccountPage from "../../../pages/Account/AccountPage";
 
 const AppRouter = () => {
   return (
@@ -12,7 +13,7 @@ const AppRouter = () => {
       <Routes>
         <Route element={<AuthGuard />}>
           <Route element={<AppLayout />}>
-            <Route path="/account" element={<div>account page</div>} />
+            <Route path="/account" element={<AccountPage />} />
             <Route path="/others" element={<div>Others page</div>} />
           </Route>
         </Route>
