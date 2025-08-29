@@ -1,0 +1,28 @@
+.security-settings {
+    padding: toRem(20);
+    background-color: $cardBackgroundColor;
+    border: 1px solid $cardBackgroundDarkColor;
+    border-radius: toRem(8);
+
+    // .security-settings__title
+    &__title {
+        @include adaptiveValue("font-size", 30, 22);
+        font-weight: 700;
+        text-align: center;
+        &:not(:last-child) {
+            margin-bottom: toRem(15);
+        }
+    }
+    //.security-settings__item
+
+    &__item {
+        &:not(:last-child) {
+            margin-bottom: toRem(20);
+        }
+    }
+    // .security-settings__form
+    &__form {
+        display: grid;
+        row-gap: toRem(10);
+    }
+}

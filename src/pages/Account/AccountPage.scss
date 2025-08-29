@@ -1,0 +1,11 @@
+.account-page {
+    &__container {
+        display: grid;
+        @media (min-width: toRem($mobile)) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        gap: toRem(30);
+
+        align-items: start;
+    }
+}

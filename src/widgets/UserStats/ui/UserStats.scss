@@ -3,7 +3,7 @@
     background-color: $cardBackgroundColor;
     border: 1px solid $cardBackgroundDarkColor;
     border-radius: toRem(8);
-    max-width: toRem(600);
+
     // .user-stats__header
     &__header {
         display: flex;
