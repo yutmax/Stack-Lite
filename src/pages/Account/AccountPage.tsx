@@ -1,4 +1,3 @@
-import { useId } from "react";
 import SecuritySettings from "../../widgets/SecuritySettings/ui/SecuritySettings";
 import UserStats from "../../widgets/UserStats/ui/UserStats";
 import "./AccountPage.scss";
@@ -6,10 +5,11 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../entities/user/model/selectors";
 import { CircularProgress } from "@mui/material";
 import { useUserStats } from "../../features/statistic/model/userStatsHook";
+import { useUpdateMe } from "../../features/security/model/useUpdateMe";
 
 const AccountPage = () => {
   const userId = useSelector(selectUser).id;
-  const { userStats, loading, error } = useUserStats(userId);
+  const { userStats, loading, error: statsError } = useUserStats(userId);
 
   return (
     <div className="account-page">
@@ -18,7 +18,7 @@ const AccountPage = () => {
           <CircularProgress />
         ) : (
           <>
-            {error && <div className="account-page__error">{error}</div>}
+            {statsError && <div className="account-page__error">{statsError}</div>}
             {userStats && (
               <UserStats
                 userStatistic={{
