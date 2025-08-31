@@ -9,6 +9,7 @@
     transform: translateX(-250px);
     transition: transform 0.3s;
     overflow-y: auto;
+    z-index: 30;
 
     @media (max-width: toRem($mobile)) {
         width: 100%;

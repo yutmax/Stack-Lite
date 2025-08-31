@@ -1,0 +1,26 @@
+.snippet-submit-page {
+    // .snippet-submit-page__container
+    &__container {
+    }
+    // .snippet-submit-page__title
+    &__title {
+        @include adaptiveValue("font-size", 30, 22);
+        font-weight: 700;
+        text-align: center;
+        &:not(:last-child) {
+            margin-bottom: toRem(30);
+        }
+    }
+    // .snippet-submit-page__form
+    &__form {
+        background-color: $cardBackgroundColor;
+        padding: toRem(20);
+        border-radius: toRem(8);
+        border: 1px solid $cardBackgroundDarkColor;
+        display: grid;
+        row-gap: toRem(15);
+    }
+    // .snippet-submit-page__form-item
+    &__form-item {
+    }
+}
