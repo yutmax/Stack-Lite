@@ -9,6 +9,7 @@ import AccountPage from "../../../pages/Account/AccountPage";
 import SnippetSubmitPage from "../../../pages/SnippetSubmit/SnippetSubmitPage";
 import MySnippetsPage from "../../../pages/MySnippets/MySnippetsPage";
 import SnippetEditPage from "../../../pages/SnippetEdit/SnippetEditPage";
+import UsersPage from "../../../pages/Users/UsersPage";
 
 const AppRouter = () => {
   return (
@@ -20,6 +21,7 @@ const AppRouter = () => {
             <Route path="/new-snippet" element={<SnippetSubmitPage />} />
             <Route path="/my-snippets" element={<MySnippetsPage />} />
             <Route path="/snippet/:id/edit" element={<SnippetEditPage />} />
+            <Route path="/users" element={<UsersPage />} />
           </Route>
         </Route>
 

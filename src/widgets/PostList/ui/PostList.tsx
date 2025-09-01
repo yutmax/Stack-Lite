@@ -1,7 +1,7 @@
 import { CircularProgress } from "@mui/material";
 import { useEffect } from "react";
 import PostCard from "../../../entities/post/ui/PostCard";
-import { selectPosts, selectPostsError, selectPostsLoading, selectPostsMeta } from "../../../entities/post/model/selectors";
+import { selectPosts, selectPostsError, selectPostsLoading, selectPostsMeta, selectPostsCurrentFilterUserId } from "../../../entities/post/model/selectors";
 import { useAppDispatch, useAppSelector } from "../../../shared/lib/hooks/storeHooks";
 import { fetchPosts } from "../../../entities/post/model/fetchPosts";
 import { PostPagination } from "../../../features/post/pagination";
@@ -19,20 +19,22 @@ const PostList = ({ userId }: PostListProps) => {
   const loading = useAppSelector(selectPostsLoading);
   const error = useAppSelector(selectPostsError);
   const meta = useAppSelector(selectPostsMeta);
+  const currentFilterUserId = useAppSelector(selectPostsCurrentFilterUserId);
 
   const hasAny = posts.length > 0;
 
   useEffect(() => {
     if (loading) return;
+    // If filter changed (e.g., user view -> global or one user -> another user) always refetch page 1
+    const filterChanged = (currentFilterUserId ?? null) !== (userId ?? null);
+    if (filterChanged) {
+      dispatch(fetchPosts({ page: 1, limit: meta.itemsPerPage, userId: userId ?? undefined }));
+      return;
+    }
     if (!hasAny) {
       dispatch(fetchPosts({ page: 1, limit: meta.itemsPerPage, userId }));
-    } else if (userId != null) {
-      const first = posts[0] as any;
-      if (first && String(first.user?.id) !== String(userId)) {
-        dispatch(fetchPosts({ page: 1, limit: meta.itemsPerPage, userId }));
-      }
     }
-  }, [dispatch, loading, hasAny, meta.itemsPerPage, userId, posts]);
+  }, [dispatch, loading, hasAny, meta.itemsPerPage, userId, currentFilterUserId]);
 
   return (
     <div className=" post-cards">

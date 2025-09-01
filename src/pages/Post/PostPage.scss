@@ -1,26 +1,3 @@
-// <div className="post-page">
-//       <div className="post-page__container" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-//         {post && <PostCard post={post} />}
-//         <div className="post-page__comments" style={{ marginTop: 24 }}>
-//           <h3 className="post-page__title">Comments</h3>
-//           <ul className="post-page__comments-list">
-//             {post?.comments.map((comment) => (
-//               <li key={comment.id} className="post-page__comment-item">
-//                 <Comment comment={comment} />
-//               </li>
-//             ))}
-//           </ul>
-
-//           <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
-//             <input style={{ flex: 1, padding: "8px 12px", borderRadius: 6, border: "1px solid #444" }} value={commentValue} onChange={(e) => setCommentValue(e.target.value)} placeholder="Write a comment..." />
-//             <button onClick={handleSend} style={{ padding: "8px 16px", borderRadius: 6 }}>
-//               Send
-//             </button>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-
 .post-page {
     &__container {
     }

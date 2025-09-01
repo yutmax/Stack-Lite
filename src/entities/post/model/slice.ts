@@ -12,6 +12,7 @@ interface PostsState {
   hasMore: boolean;
   meta: MetaByPost;
   listLoaded: boolean;
+  currentFilterUserId: number | null;
 }
 
 const initialState: PostsState = {
@@ -27,6 +28,7 @@ const initialState: PostsState = {
     sortBy: [["createdAt", "DESC"]],
   },
   listLoaded: false,
+  currentFilterUserId: null,
 };
 
 const postsSlice = createSlice({
@@ -72,6 +74,8 @@ const postsSlice = createSlice({
         state.meta = action.payload.meta;
         state.hasMore = action.payload.meta.currentPage < action.payload.meta.totalPages;
         state.listLoaded = true;
+        const anyAction: any = action;
+        state.currentFilterUserId = anyAction.meta?.arg?.userId ?? null;
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.loading = false;
