@@ -8,24 +8,35 @@ import { PostPagination } from "../../../features/post/pagination";
 
 import "./PostList.scss";
 
-const PostList = () => {
+interface PostListProps {
+  userId?: number | null;
+}
+
+const PostList = ({ userId }: PostListProps) => {
   const dispatch = useAppDispatch();
 
   const posts = useAppSelector(selectPosts);
   const loading = useAppSelector(selectPostsLoading);
   const error = useAppSelector(selectPostsError);
   const meta = useAppSelector(selectPostsMeta);
-  const listLoaded = useAppSelector((s) => s.posts.listLoaded);
+
+  const hasAny = posts.length > 0;
 
   useEffect(() => {
-    if (!loading && (!listLoaded || posts.length === 0)) {
-      dispatch(fetchPosts({ page: 1, limit: meta.itemsPerPage }));
+    if (loading) return;
+    if (!hasAny) {
+      dispatch(fetchPosts({ page: 1, limit: meta.itemsPerPage, userId }));
+    } else if (userId != null) {
+      const first = posts[0] as any;
+      if (first && String(first.user?.id) !== String(userId)) {
+        dispatch(fetchPosts({ page: 1, limit: meta.itemsPerPage, userId }));
+      }
     }
-  }, [dispatch, loading, listLoaded, posts.length, meta.itemsPerPage]);
+  }, [dispatch, loading, hasAny, meta.itemsPerPage, userId, posts]);
 
   return (
     <div className=" post-cards">
-      <h3 className="post-cards__title">Interesting posts for you</h3>
+      <h3 className="post-cards__title">{userId ? "My snippets" : "Interesting posts for you"}</h3>
       <ul className="post-cards__list">
         {loading && <CircularProgress sx={{ justifySelf: "center" }} />}
         {error && <div className="post-cards__error">{error}</div>}
@@ -39,7 +50,7 @@ const PostList = () => {
       </ul>
 
       <div className="post-cards__pagination">
-        <PostPagination />
+        <PostPagination userId={userId} />
       </div>
     </div>
   );

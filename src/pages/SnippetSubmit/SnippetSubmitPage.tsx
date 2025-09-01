@@ -1,11 +1,11 @@
 import "./SnippetSubmitPage.scss";
 import { useState, useMemo } from "react";
 import { Button, Typography } from "@mui/material";
-import { useSnippetLanguages } from "../../features/snippet/model/useSnippetLanguages";
-import { useSubmitSnippet } from "../../features/snippet/model/useSubmitSnippet";
+import { useSnippetLanguages } from "../../features/post/model/useSnippetLanguages";
+import { useSubmitSnippet } from "../../features/post/model/useSubmitSnippet";
 import { getLanguageExtension } from "../../shared/config/snippetLanguageExtensions";
 import CodeEditor from "../../shared/ui/CodeEditor/CodeEditor";
-import LanguageSelect from "../../features/snippet/ui/LanguageSelect/LanguageSelect";
+import LanguageSelect from "../../features/post/ui/LanguageSelect/LanguageSelect";
 
 const SnippetSubmitPage = () => {
   const { languages, loading: langsLoading, error: langsError } = useSnippetLanguages();

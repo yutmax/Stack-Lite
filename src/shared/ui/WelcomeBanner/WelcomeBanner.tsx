@@ -1,7 +1,7 @@
 import "./WelcomeBanner.scss";
 
 type WelcomeBannerProps = {
-  username: string;
+  username: string | null;
 };
 
 const WelcomeBanner = ({ username }: WelcomeBannerProps) => {

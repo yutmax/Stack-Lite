@@ -5,10 +5,11 @@ import { usePostPagination } from "../model/usePostPagination";
 interface PostPaginationProps {
   size?: "small" | "medium" | "large";
   className?: string;
+  userId?: number | null;
 }
 
-export const PostPagination = ({ size = "small", className = "" }: PostPaginationProps) => {
-  const { page, totalPages, loading, changePage } = usePostPagination();
+export const PostPagination = ({ size = "small", className = "", userId }: PostPaginationProps) => {
+  const { page, totalPages, loading, changePage } = usePostPagination(userId);
 
   const handleChange = useCallback(
     (_: React.ChangeEvent<unknown>, value: number) => {
