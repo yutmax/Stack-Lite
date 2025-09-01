@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchPosts } from "./fetchPosts";
 import { markPost } from "../../../features/post/marks/model/markPost";
 import { fetchPostById } from "./fetchPostById";
+import { deletePost } from "./deletePost";
 import type { MetaByPost, Post } from "./types";
 
 interface PostsState {
@@ -10,7 +11,7 @@ interface PostsState {
   error: string | null;
   hasMore: boolean;
   meta: MetaByPost;
-  listLoaded: boolean; // fetched list at least once
+  listLoaded: boolean;
 }
 
 const initialState: PostsState = {
@@ -47,7 +48,6 @@ const postsSlice = createSlice({
       if (replaceIdx !== -1) {
         p.comments[replaceIdx] = comment;
       } else {
-        // Avoid duplicate if same id already exists
         if (!p.comments.some((c: any) => c.id === comment.id)) {
           p.comments = [...p.comments, comment];
         }
@@ -106,11 +106,18 @@ const postsSlice = createSlice({
         const { post } = action.payload;
         const idx = state.posts.findIndex((p) => p.id === post.id);
         if (idx === -1) {
-          // append detailed post without removing others
           state.posts.push(post);
         } else {
           state.posts[idx] = post;
         }
+      })
+      .addCase(deletePost.pending, (state, action) => {
+        const id = action.meta.arg.id;
+        state.posts = state.posts.filter((p) => p.id !== id);
+        state.meta.totalItems = Math.max(0, state.meta.totalItems - 1);
+      })
+      .addCase(deletePost.rejected, (state, action) => {
+        state.error = action.payload || "It was not possible to remove";
       });
   },
 });
