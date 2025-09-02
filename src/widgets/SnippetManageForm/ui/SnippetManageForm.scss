@@ -1,0 +1,16 @@
+.snippet-manage-form {
+    background-color: $cardBackgroundColor;
+    padding: toRem(20);
+    border-radius: toRem(8);
+    border: 1px solid $cardBackgroundDarkColor;
+    display: grid;
+    row-gap: toRem(15);
+    // .snippet-manage-form__line
+    &__line {
+    }
+    // .snippet-manage-form__label
+    &__label {
+        font-weight: 600;
+        margin-bottom: toRem(8);
+    }
+}

@@ -5,21 +5,24 @@ import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../shared/lib/hooks/storeHooks";
 import { selectUser } from "../../user/model/selectors";
 import type { Post } from "../model/types";
+import { useDeleteSnippet } from "../../../features/post/model/useDeleteSnippet";
 
 import "./PostCard.scss";
 
 import CommentIcon from "@mui/icons-material/Comment";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ErrorMessage from "../../../shared/ui/ErrorMessage/ErrorMessage";
 
 type PostCardProps = {
   post: Post;
+  onDelete?: (id: number | string) => void;
 };
 
-const PostCard = ({ post }: PostCardProps) => {
+const PostCard = ({ post, onDelete }: PostCardProps) => {
   const navigate = useNavigate();
   const user = useAppSelector(selectUser);
-
+  const { deleteSnippet, error, loading } = useDeleteSnippet();
   const commentsCount = post.comments?.length ?? 0;
 
   let isOwner: boolean = false;
@@ -29,9 +32,16 @@ const PostCard = ({ post }: PostCardProps) => {
     navigate(`/post/${post.id}`);
   };
 
-  const handleDeleteClick = () => {
-    if (confirm("Delete this snippet?")) {
-    }
+  const handleEditClick = () => {
+    navigate(`/snippet/${post.id}/edit`);
+  };
+
+  const handleDeleteClick = async () => {
+    if (!window.confirm("Are you sure you want to delete this snippet?")) return;
+    try {
+      await deleteSnippet(post.id);
+      onDelete?.(post.id);
+    } catch {}
   };
 
   return (
@@ -67,10 +77,10 @@ const PostCard = ({ post }: PostCardProps) => {
           <PostReactionButtons postId={post.id} marks={post.marks} />
           {isOwner && (
             <>
-              <IconButton size="small" color="primary" onClick={() => navigate(`/snippet/${post.id}/edit`)}>
+              <IconButton size="small" color="primary" onClick={handleEditClick}>
                 <EditIcon />
               </IconButton>
-              <IconButton size="small" onClick={handleDeleteClick}>
+              <IconButton loading={loading} size="small" onClick={handleDeleteClick}>
                 <DeleteIcon color="error" />
               </IconButton>
             </>
@@ -80,6 +90,8 @@ const PostCard = ({ post }: PostCardProps) => {
           {commentsCount}
         </Button>
       </div>
+
+      {error && <ErrorMessage message={error} />}
     </div>
   );
 };

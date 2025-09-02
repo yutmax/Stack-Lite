@@ -16,6 +16,8 @@ type PostReactionButtonsProps = {
 
 const PostReactionButtons = ({ postId, marks }: PostReactionButtonsProps) => {
   const [currentUserMark, setCurrentUserMark] = useState<"like" | "dislike" | "none">("none");
+  const [likeCount, setLikeCount] = useState(0);
+  const [dislikeCount, setDislikeCount] = useState(0);
 
   const navigate = useNavigate();
   const user = useAppSelector(selectUser);
@@ -23,10 +25,10 @@ const PostReactionButtons = ({ postId, marks }: PostReactionButtonsProps) => {
   useEffect(() => {
     const mark = marks?.find((m) => m.user.id === user.id)?.type || "none";
     setCurrentUserMark(mark);
-  }, [marks, user.id]);
 
-  const likeCount = marks?.filter((mark) => mark.type === "like").length ?? 0;
-  const dislikeCount = marks?.filter((mark) => mark.type === "dislike").length ?? 0;
+    setLikeCount(marks?.filter((m) => m.type === "like").length || 0);
+    setDislikeCount(marks?.filter((m) => m.type === "dislike").length || 0);
+  }, [marks, user.id]);
 
   const handleReaction = async (type: "like" | "dislike") => {
     if (!user.isAuth) {
@@ -35,11 +37,26 @@ const PostReactionButtons = ({ postId, marks }: PostReactionButtonsProps) => {
     }
     const newType = currentUserMark === type ? "none" : type;
 
+    let newLikeCount = likeCount;
+    let newDislikeCount = dislikeCount;
+
+    if (currentUserMark === "like") newLikeCount -= 1;
+    if (currentUserMark === "dislike") newDislikeCount -= 1;
+    if (newType === "like") newLikeCount += 1;
+    if (newType === "dislike") newDislikeCount += 1;
+
+    setCurrentUserMark(newType);
+    setLikeCount(newLikeCount);
+    setDislikeCount(newDislikeCount);
+
     try {
-      markPost(Number(postId), newType);
-      setCurrentUserMark(newType);
+      await markPost(Number(postId), newType);
     } catch (err) {
       console.error("Error marking post:", err);
+
+      setCurrentUserMark(currentUserMark);
+      setLikeCount(likeCount);
+      setDislikeCount(dislikeCount);
     }
   };
 

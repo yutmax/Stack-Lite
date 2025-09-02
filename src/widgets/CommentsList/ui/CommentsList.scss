@@ -1,0 +1,34 @@
+.comments-list {
+    // .comments-list__title
+    &__title {
+        &:not(:last-child) {
+            margin-bottom: toRem(20);
+        }
+    }
+    // .comments-list__add-comment
+    &__add-comment {
+        display: flex;
+        @media (max-width: toRem($mobileSmall)) {
+            flex-direction: column;
+        }
+        gap: toRem(20);
+
+        &:not(:last-child) {
+            margin-bottom: toRem(25);
+        }
+    }
+    // .comments-list__list
+    &__list {
+        padding: toRem(15);
+        border-radius: toRem(8);
+        border: 1px solid $cardBackgroundDarkColor;
+
+        display: grid;
+        row-gap: toRem(10);
+    }
+    // .comments-list__item
+    &__item {
+    }
+}
+.title {
+}

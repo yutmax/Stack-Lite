@@ -7,9 +7,10 @@ import "./PostList.scss";
 interface PostListProps {
   posts: Post[];
   title: string;
+  onDelete?: (id: number | string) => void;
 }
 
-const PostList = ({ posts, title }: PostListProps) => {
+const PostList = ({ posts, title, onDelete }: PostListProps) => {
   return (
     <div className=" post-cards">
       <h3 className="post-cards__title title">{title}</h3>
@@ -19,7 +20,7 @@ const PostList = ({ posts, title }: PostListProps) => {
         ) : (
           posts.map((post) => (
             <li className="post-cards__item" key={post.id}>
-              <PostCard post={post} />
+              <PostCard post={post} onDelete={onDelete} />
             </li>
           ))
         )}
