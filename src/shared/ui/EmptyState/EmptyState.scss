@@ -1,0 +1,7 @@
+.empty-state {
+    text-align: center;
+    color: #585858;
+    @include adaptiveValue("font-size", 25, 18);
+    text-decoration: underline;
+    padding: toRem(20);
+}

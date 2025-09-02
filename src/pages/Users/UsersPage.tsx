@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import UserList from "../../widgets/UserList/ui/UserList";
 import "./UsersPage.scss";
-import { Button, CircularProgress } from "@mui/material";
-import UserPagination from "../../features/user/pagination/ui/UserPagination";
+import { CircularProgress } from "@mui/material";
+
 import type { MetaByPost } from "../../entities/post/model/types";
+import PaginationControl from "../../widgets/Pagination/ui/PaginationControl";
 
 const UsersPage = () => {
   const [users, setUsers] = useState([]);
@@ -35,7 +36,7 @@ const UsersPage = () => {
         {loading ? <CircularProgress /> : <UserList users={users} />}
 
         <div className="users-page__pagination">
-          <UserPagination page={currentPage} changePage={handleChangePage} loading={loading} totalPages={meta?.totalPages} />
+          <PaginationControl page={currentPage} changePage={handleChangePage} loading={loading} totalPages={meta?.totalPages} />
         </div>
       </div>
     </div>

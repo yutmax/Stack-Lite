@@ -1,0 +1,7 @@
+.error-message {
+    text-align: center;
+    color: #f80202;
+    @include adaptiveValue("font-size", 25, 18);
+    text-decoration: underline;
+    padding: toRem(20);
+}
