@@ -2,9 +2,6 @@
     &__container {
     }
     &__title {
-        @include adaptiveValue("font-size", 30, 22);
-        font-weight: 700;
-        text-align: center;
         &:not(:last-child) {
             margin-bottom: toRem(30);
         }

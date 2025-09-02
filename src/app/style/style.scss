@@ -74,7 +74,18 @@ body {
 }
 
 // General styles ========================================================================================================================================================
+.title {
+    @include adaptiveValue("font-size", 22, 18);
+    font-weight: 500;
+    &--big {
+        @include adaptiveValue("font-size", 30, 22);
+        font-weight: 700;
+    }
 
+    &--center {
+        text-align: center;
+    }
+}
 .link {
     position: relative;
     color: $blueColor;

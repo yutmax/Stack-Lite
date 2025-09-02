@@ -5,9 +5,9 @@ import PostList from "../../widgets/PostList/ui/PostList";
 import { useEffect, useState } from "react";
 import PaginationControl from "../../widgets/Pagination/ui/PaginationControl";
 import type { MetaByPost } from "../../entities/post/model/types";
-import { CircularProgress } from "@mui/material";
+
 import ErrorMessage from "../../shared/ui/ErrorMessage/ErrorMessage";
-import FullPageSpinner from "../../shared/ui/FullPageSpinner/FullPageSpinner";
+
 import Spinner from "../../shared/ui/Spinner/Spinner";
 
 const HomePage = () => {

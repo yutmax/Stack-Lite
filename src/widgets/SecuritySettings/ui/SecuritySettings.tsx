@@ -62,7 +62,7 @@ const SecuritySettings = () => {
 
   return (
     <div className="security-settings">
-      <h3 className="security-settings__title">Edit your profile</h3>
+      <h3 className="security-settings__title title title--big title--center">Edit your profile</h3>
       <div className="security-settings__item">
         <form className="security-settings__form" onSubmit={handleNewUsernameSubmit}>
           <Typography variant="h5">Change your username:</Typography>

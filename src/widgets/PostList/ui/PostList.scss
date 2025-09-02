@@ -1,8 +1,6 @@
 .post-cards {
     padding-bottom: toRem(20);
     &__title {
-        @include adaptiveValue("font-size", 22, 18);
-        font-weight: 500;
         &:not(:last-child) {
             margin-bottom: toRem(15);
         }

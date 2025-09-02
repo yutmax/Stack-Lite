@@ -12,7 +12,7 @@ interface PostListProps {
 const PostList = ({ posts, title }: PostListProps) => {
   return (
     <div className=" post-cards">
-      <h3 className="post-cards__title">{title}</h3>
+      <h3 className="post-cards__title title">{title}</h3>
       <ul className="post-cards__list">
         {posts.length === 0 ? (
           <EmptyState message="No posts available." />

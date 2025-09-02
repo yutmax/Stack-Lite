@@ -1,10 +1,5 @@
+import type { Mark } from "../../../features/post/marks/model/types";
 import type { User } from "../../user/model/types";
-
-type Mark = {
-  id: string;
-  type: "like" | "dislike";
-  user: User;
-};
 
 export type MetaByPost = {
   itemsPerPage: number;
