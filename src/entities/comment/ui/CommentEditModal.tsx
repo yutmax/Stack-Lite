@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from "@mui/material";
-import type { Comment } from "../../../../entities/comment/model/types";
+import type { Comment } from "../model/types";
 
 interface CommentEditModalProps {
   open: boolean;

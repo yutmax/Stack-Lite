@@ -1,0 +1,7 @@
+.user-table {
+    max-width: toRem(1300);
+    margin: 0 auto;
+    &:not(:last-child) {
+        margin-bottom: toRem(30);
+    }
+}
