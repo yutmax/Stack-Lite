@@ -35,9 +35,14 @@ const UserStats = ({ userStatistic }: UserStatsProps) => {
   const { logout, isLoading: isLogoutLoading } = useLogout();
   const { deleteMe, isLoading: isDeleting } = useDeleteMe();
 
-  const user = useAppSelector(selectUser);
+  const user = userStatistic?.user;
+
+  const accoutnOwner = useAppSelector(selectUser);
+
+  console.log(accoutnOwner, user);
 
   if (!userStatistic) return null;
+
   return (
     <div className="user-stats">
       <div className="user-stats__header">
@@ -45,9 +50,9 @@ const UserStats = ({ userStatistic }: UserStatsProps) => {
           <img src={personAvatar} alt="Avatar" />
         </div>
         <div className="user-stats__person">
-          <div className="user-stats__username">{user.username}</div>
-          <div className="user-stats__role">Role: {user.role}</div>
-          <div className="user-stats__id">ID: {user.id}</div>
+          <div className="user-stats__username">{user?.username}</div>
+          <div className="user-stats__role">Role: {user?.role}</div>
+          <div className="user-stats__id">ID: {user?.id}</div>
         </div>
       </div>
       <div className="user-stats__divider" />
@@ -61,14 +66,16 @@ const UserStats = ({ userStatistic }: UserStatsProps) => {
         <Stat value={userStatistic.statistic.correctAnswersCount} label="correct answers" />
         <Stat value={userStatistic.statistic.regularAnswersCount} label="regular answers" />
       </div>
-      <div className="user-stats__actions">
-        <IconButton loading={isLogoutLoading} onClick={logout} color="primary">
-          <LogoutIcon />
-        </IconButton>
-        <IconButton loading={isDeleting} onClick={deleteMe} color="error">
-          <DeleteIcon />
-        </IconButton>
-      </div>
+      {Number(accoutnOwner?.id) === user?.id && (
+        <div className="user-stats__actions">
+          <IconButton loading={isLogoutLoading} onClick={logout} color="primary">
+            <LogoutIcon />
+          </IconButton>
+          <IconButton loading={isDeleting} onClick={deleteMe} color="error">
+            <DeleteIcon />
+          </IconButton>
+        </div>
+      )}
     </div>
   );
 };

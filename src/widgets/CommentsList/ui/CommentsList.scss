@@ -1,4 +1,5 @@
 .comments-list {
+    padding-bottom: toRem(40);
     // .comments-list__title
     &__title {
         &:not(:last-child) {
