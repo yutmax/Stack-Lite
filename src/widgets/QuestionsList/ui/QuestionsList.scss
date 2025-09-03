@@ -1,0 +1,12 @@
+.questions-list {
+    display: grid;
+    row-gap: toRem(15);
+
+    border: 1px solid $cardBackgroundDarkColor;
+    border-radius: toRem(8);
+    padding: toRem(15);
+
+    &:not(:last-child) {
+        margin-bottom: toRem(20);
+    }
+}

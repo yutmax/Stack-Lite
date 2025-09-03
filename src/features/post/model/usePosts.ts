@@ -20,7 +20,6 @@ export function usePosts(page: number, limit = 10, userId?: number | null) {
       .then((data) => {
         setPosts(data.data.data);
         setMeta(data.data.meta);
-        setLoading(false);
       })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));

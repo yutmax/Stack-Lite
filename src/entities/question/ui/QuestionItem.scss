@@ -1,0 +1,47 @@
+.question-item {
+    background-color: $cardBackgroundColor;
+    padding: toRem(15);
+    border-radius: toRem(8);
+    &__header {
+        display: flex;
+        gap: toRem(10);
+
+        align-items: start;
+
+        &:not(:last-child) {
+            margin-bottom: toRem(20);
+        }
+    }
+
+    &__icon {
+    }
+
+    &__info {
+        display: grid;
+        row-gap: toRem(5);
+    }
+
+    &__title {
+    }
+
+    &__asked-by {
+        font-style: italic;
+    }
+    &__description {
+        span {
+            font-weight: 600;
+        }
+        &:not(:last-child) {
+            margin-bottom: toRem(20);
+        }
+    }
+
+    &__attached {
+        border-radius: toRem(8);
+        border: 2px solid $cardBackgroundDarkColor;
+
+        &:not(:last-child) {
+            margin-bottom: toRem(20);
+        }
+    }
+}

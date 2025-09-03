@@ -1,0 +1,29 @@
+.answers {
+    display: grid;
+}
+.answer-item {
+    border: 1px solid $cardBackgroundDarkColor;
+    padding: toRem(15);
+    border-radius: toRem(8);
+    position: relative;
+
+    &:not(:last-child) {
+        margin-bottom: toRem(10);
+    }
+
+    &__content {
+        margin: 0;
+    }
+
+    &__correct-badge {
+        position: absolute;
+        top: toRem(10);
+        right: toRem(10);
+        background-color: #04d712;
+        color: #fff;
+        padding: toRem(5) toRem(10);
+        border-radius: toRem(5);
+        font-size: toRem(12);
+        font-weight: 600;
+    }
+}

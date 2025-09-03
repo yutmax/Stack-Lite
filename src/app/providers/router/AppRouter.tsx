@@ -11,6 +11,7 @@ import MySnippetsPage from "../../../pages/MySnippets/MySnippetsPage";
 import SnippetEditPage from "../../../pages/SnippetEdit/SnippetEditPage";
 import UsersPage from "../../../pages/Users/UsersPage";
 import UserPage from "../../../pages/User/UserPage";
+import QuestionsPage from "../../../pages/Question/QuestionPage";
 
 const AppRouter = () => {
   return (
@@ -35,6 +36,7 @@ const AppRouter = () => {
         <Route element={<AppLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/post/:id" element={<PostPage />} />
+          <Route path="/questions" element={<QuestionsPage />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" />} />
