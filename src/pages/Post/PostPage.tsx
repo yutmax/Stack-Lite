@@ -40,6 +40,29 @@ const PostPage = () => {
       });
   };
 
+  const updateComment = (commentId: number | string, content: string) => {
+    fetch(`/api/comments/${commentId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content }),
+      credentials: "include",
+    })
+      .then(async (res) => {
+        if (!res.ok) {
+          const data = await res.json().catch(() => null);
+          const message = data?.message || `HTTP ${res.status}`;
+          throw new Error(message);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        throw err;
+      })
+      .finally(() => {
+        refreshComments();
+      });
+  };
+
   return (
     <div className="post-page">
       <div className="post-page__container">
@@ -48,7 +71,7 @@ const PostPage = () => {
         {post && (
           <>
             <PostCard post={post} />
-            <CommentsList comments={comments} onDelte={deleteComment} onSend={sendComment} sending={sending} sendError={sendError} canSend={!!currentUser} />
+            <CommentsList comments={comments} onEdit={updateComment} onDelete={deleteComment} onSend={sendComment} sending={sending} sendError={sendError} canSend={!!currentUser} />
           </>
         )}
       </div>

@@ -10,17 +10,18 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 interface CommentProps {
   comment: Comment;
-  onDelte?: (commentId: number) => void;
+  onDelete?: (commentId: number) => void;
+  onEditClick?: () => void;
 }
 
-const CommentItem = ({ comment, onDelte }: CommentProps) => {
+const CommentItem = ({ comment, onDelete, onEditClick }: CommentProps) => {
   const userId = useSelector(selectUser).id;
   const isOwn = String(comment?.user?.id) === String(userId);
 
   const handleDelete = () => {
-    if (!onDelte) return;
+    if (!onDelete) return;
     if (!window.confirm("Are you sure you want to delete this comment?")) return;
-    onDelte(Number(comment.id));
+    onDelete(Number(comment.id));
   };
 
   return (
@@ -29,7 +30,7 @@ const CommentItem = ({ comment, onDelte }: CommentProps) => {
       <div className="comment__content">{comment.content}</div>
       {isOwn && (
         <div className="comment__own-badge">
-          <IconButton size="small" color="primary">
+          <IconButton onClick={onEditClick} size="small" color="primary">
             <EditIcon />
           </IconButton>
           <IconButton onClick={handleDelete} size="small" color="primary">

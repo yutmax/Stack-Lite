@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from "@mui/material";
+import { useEffect, useState } from "react";
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, CircularProgress } from "@mui/material";
 import type { Comment } from "../model/types";
 
 interface CommentEditModalProps {
@@ -11,7 +11,7 @@ interface CommentEditModalProps {
   error?: string | null;
 }
 
-export const CommentEditModal = ({ open, comment, onClose, onSave, loading, error }: CommentEditModalProps) => {
+const CommentEditModal = ({ open, comment, onClose, onSave, loading = false, error = null }: CommentEditModalProps) => {
   const [value, setValue] = useState("");
 
   useEffect(() => {
@@ -21,22 +21,22 @@ export const CommentEditModal = ({ open, comment, onClose, onSave, loading, erro
   }, [open, comment]);
 
   const handleSubmit = async () => {
-    if (!value.trim()) return;
+    if (!value.trim() || loading) return;
     await onSave(value.trim());
   };
 
   return (
-    <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
+    <Dialog open={open} onClose={loading ? undefined : onClose} fullWidth maxWidth="sm">
       <DialogTitle>Edit comment</DialogTitle>
-      <DialogContent sx={{ pt: 1 }}>
-        <TextField autoFocus fullWidth multiline minRows={3} value={value} onChange={(e) => setValue(e.target.value)} placeholder="Edit your comment" />
-        {error && <div style={{ color: "#f44336", marginTop: 8, fontSize: 14 }}>{error}</div>}
+      <DialogContent>
+        <TextField value={value} onChange={(e) => setValue(e.target.value)} fullWidth multiline minRows={3} autoFocus disabled={loading} sx={{ mt: 1 }} />
+        {error && <p style={{ color: "red", marginTop: 8 }}>{error}</p>}
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} disabled={loading}>
           Cancel
         </Button>
-        <Button onClick={handleSubmit} disabled={loading || !value.trim()} variant="contained">
+        <Button variant="contained" onClick={handleSubmit} disabled={!value.trim() || loading} startIcon={loading ? <CircularProgress size={18} /> : null}>
           Save
         </Button>
       </DialogActions>
