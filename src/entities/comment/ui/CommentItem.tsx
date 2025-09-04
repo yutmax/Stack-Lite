@@ -10,29 +10,26 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 interface CommentProps {
   comment: Comment;
-  onEdit?: (comment: Comment) => void;
-  onDelete?: (comment: Comment) => void;
+  onDelte?: (commentId: number) => void;
 }
 
-const CommentItem = ({ comment, onDelete, onEdit }: CommentProps) => {
+const CommentItem = ({ comment, onDelte }: CommentProps) => {
   const userId = useSelector(selectUser).id;
   const isOwn = String(comment?.user?.id) === String(userId);
 
-  const handleEdit = (e: React.MouseEvent) => {
-    e.preventDefault();
-    onEdit?.(comment);
+  const handleDelete = () => {
+    if (!onDelte) return;
+    if (!window.confirm("Are you sure you want to delete this comment?")) return;
+    onDelte(Number(comment.id));
   };
-  const handleDelete = (e: React.MouseEvent) => {
-    e.preventDefault();
-    onDelete?.(comment);
-  };
+
   return (
     <div className="comment">
       <div className="comment__author">Author: {comment?.user?.username}</div>
       <div className="comment__content">{comment.content}</div>
       {isOwn && (
         <div className="comment__own-badge">
-          <IconButton onClick={handleEdit} size="small" color="primary">
+          <IconButton size="small" color="primary">
             <EditIcon />
           </IconButton>
           <IconButton onClick={handleDelete} size="small" color="primary">

@@ -1,5 +1,5 @@
 import UserTable from "../../widgets/UserList/ui/UserTable";
-import { CircularProgress } from "@mui/material";
+
 import PaginationControl from "../../widgets/Pagination/ui/PaginationControl";
 import { useUsers } from "../../features/users/model/useUsers";
 
