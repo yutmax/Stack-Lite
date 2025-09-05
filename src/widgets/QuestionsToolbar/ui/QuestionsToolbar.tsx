@@ -1,14 +1,16 @@
 import { Button, TextField } from "@mui/material";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
+
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 import "./QuestionsToolbar.scss";
 
 interface QuestionsToolbarProps {
   onSearch?: (query: string) => void;
-  onMyQuestions?: () => void;
 }
 
-const QuestionsToolbar = ({ onMyQuestions, onSearch }: QuestionsToolbarProps) => {
+const QuestionsToolbar = ({ onSearch }: QuestionsToolbarProps) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,6 +35,10 @@ const QuestionsToolbar = ({ onMyQuestions, onSearch }: QuestionsToolbarProps) =>
           Search
         </Button>
       </div>
+      <NavLink className="question-toolbar__link" to="/questions/new">
+        <AddCircleOutlineIcon />
+        Ask Question
+      </NavLink>
     </div>
   );
 };

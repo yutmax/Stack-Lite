@@ -7,6 +7,17 @@
         column-gap: toRem(20);
     }
 
+    &__link {
+        display: flex;
+        align-items: center;
+        column-gap: toRem(10);
+        background-color: $blueColor;
+        border-radius: toRem(8);
+        justify-self: start;
+        padding: toRem(10) toRem(15);
+        color: #fff;
+    }
+
     &:not(:last-child) {
         margin-bottom: toRem(30);
     }

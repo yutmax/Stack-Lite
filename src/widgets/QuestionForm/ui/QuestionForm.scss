@@ -1,0 +1,7 @@
+.question-form {
+    display: grid;
+    row-gap: toRem(15);
+    padding: toRem(20);
+    border-radius: toRem(8);
+    border: 1px solid $cardBackgroundDarkColor;
+}
