@@ -7,20 +7,29 @@ import ErrorMessage from "../../shared/ui/ErrorMessage/ErrorMessage";
 import EmptyState from "../../shared/ui/EmptyState/EmptyState";
 
 import "./QuestionPage.scss";
+import QuestionsToolbar from "../../widgets/QuestionsToolbar/ui/QuestionsToolbar";
 
 const QuestionsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const { questions, meta, isLoading, error } = useQuestions(currentPage, 10);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const { questions, meta, isLoading, error } = useQuestions(currentPage, 10, searchQuery);
 
   const handleChangePage = (nextPage: number) => {
     setCurrentPage(nextPage);
   };
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    setCurrentPage(1);
+  };
+
   return (
     <div className="question-page">
       <div className="question-page__container">
         <h1 className="question-page__title title title--big title--center">Questions</h1>
 
         {error && <ErrorMessage message={error} />}
+        <QuestionsToolbar onSearch={handleSearch} />
         {isLoading && <Spinner />}
         {questions.length === 0 && !isLoading && !error && <EmptyState message="No questions found." />}
         {questions.length > 0 && !isLoading && (

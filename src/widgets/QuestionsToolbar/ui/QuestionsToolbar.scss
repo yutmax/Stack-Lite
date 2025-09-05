@@ -1,0 +1,13 @@
+.question-toolbar {
+    display: grid;
+    row-gap: toRem(20);
+    // .question-toolbar__line
+    &__line {
+        display: flex;
+        column-gap: toRem(20);
+    }
+
+    &:not(:last-child) {
+        margin-bottom: toRem(30);
+    }
+}
