@@ -1,0 +1,55 @@
+import { useCallback, useEffect, useState } from "react";
+import type { Answer } from "../../question/types";
+
+export function useAnswers(questionId?: number | string, isResolved?: boolean) {
+  const [answers, setAnswers] = useState<Answer[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchAnswers = useCallback(() => {
+    if (!questionId) return;
+    setLoading(true);
+    setError(null);
+    fetch(`/api/answers?questionId=${questionId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        let list: Answer[] = data.data ?? [];
+        if (isResolved) {
+          list = [...list.filter((a) => a.isCorrect), ...list.filter((a) => !a.isCorrect)];
+        }
+        setAnswers(list);
+      })
+      .catch((err) => setError(err.message || "Failed to load answers"))
+      .finally(() => setLoading(false));
+  }, [questionId]);
+
+  const deleteAnswer = useCallback((answerId: number | string) => {
+    setLoading(true);
+    setError(null);
+    fetch(`/api/answers/${answerId}`, {
+      method: "DELETE",
+      credentials: "include",
+    })
+      .then((res) => {
+        if (res.ok) {
+          setAnswers((prev) => prev.filter((answer) => answer.id !== answerId));
+        }
+      })
+      .catch((err) => {
+        setError(err.message || "Failed to delete answer");
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  useEffect(() => {
+    fetchAnswers();
+  }, [fetchAnswers]);
+
+  return {
+    answers,
+    loading,
+    error,
+    deleteAnswer,
+    refetch: fetchAnswers,
+  };
+}

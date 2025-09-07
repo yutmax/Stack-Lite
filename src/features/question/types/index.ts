@@ -4,6 +4,7 @@ export type Answer = {
   id: number | string;
   content: string;
   isCorrect: boolean;
+  user?: User;
 };
 
 export type Question = {

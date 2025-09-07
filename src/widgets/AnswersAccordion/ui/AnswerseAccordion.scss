@@ -1,5 +1,10 @@
 .answers {
     display: grid;
+    &__info {
+        @include adaptiveValue("font-size", 25, 22);
+        color: #6c757d;
+        font-weight: 500;
+    }
 }
 .answer-item {
     border: 1px solid $cardBackgroundDarkColor;

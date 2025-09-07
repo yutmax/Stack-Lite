@@ -5,8 +5,6 @@ import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-
-import "./QuestionItem.scss";
 import AnswerseAccordion from "../../../widgets/AnswersAccordion/ui/AnswerseAccordion";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../user/model/selectors";
@@ -17,17 +15,22 @@ import ErrorMessage from "../../../shared/ui/ErrorMessage/ErrorMessage";
 import SuccessMessage from "../../../widgets/SuccessMessage/ui/SuccessMessage";
 import { useNavigate } from "react-router-dom";
 
+import "./QuestionItem.scss";
+import PostAnswerBar from "../../../widgets/PostAnswerBar/ui/PostAnswerBar";
+import { useAnswers } from "../../../features/answer/model/useAnswers";
+
 interface QuestionItemProps {
   question: Question;
 }
 
 const QuestionItem = ({ question }: QuestionItemProps) => {
-  const user = useSelector(selectUser);
   const [deleting, setDeleting] = useState(false);
   const [deleteError, setDeleteError] = useState<string | null>(null);
   const [deleteSuccess, setDeleteSuccess] = useState(false);
 
+  const user = useSelector(selectUser);
   const navigate = useNavigate();
+  const { answers, loading, error, deleteAnswer, refetch } = useAnswers(question.id, question.isResolved);
 
   const isOwner = user?.id === question.user.id;
 
@@ -83,9 +86,10 @@ const QuestionItem = ({ question }: QuestionItemProps) => {
           </IconButton>
         </div>
       )}
+      <PostAnswerBar refetch={refetch} questionId={question.id} />
       {deleteError && <ErrorMessage message={deleteError} />}
       {deleteSuccess && <SuccessMessage message="Question deleted successfully." />}
-      {question.answers.length > 0 && <AnswerseAccordion answers={question.answers} />}
+      {question.answers.length > 0 && <AnswerseAccordion deleteAnswer={deleteAnswer} answers={answers} />}
     </div>
   );
 };

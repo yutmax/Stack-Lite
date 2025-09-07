@@ -1,0 +1,9 @@
+.post-answer-bar {
+    display: flex;
+    column-gap: toRem(15);
+    align-items: center;
+
+    &:not(:last-child) {
+        margin-bottom: toRem(15);
+    }
+}

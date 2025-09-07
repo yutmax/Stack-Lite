@@ -1,0 +1,40 @@
+.answer-item {
+    // .answer-item__header
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding-bottom: toRem(5);
+        &:not(:last-child) {
+            margin-bottom: toRem(10);
+        }
+    }
+    // .answer-item__user
+    &__user {
+        span {
+            font-weight: 500;
+        }
+    }
+    // .answer-item__status
+    &__status {
+    }
+    // .answer-item__correct
+    &__correct {
+        background-color: #79dc4b;
+        padding: toRem(5);
+        border-radius: toRem(8);
+        font-weight: 500;
+    }
+    // .answer-item__content
+    &__content {
+        border-top: 1px solid $cardBackgroundDarkColor;
+        border-bottom: 1px solid $cardBackgroundDarkColor;
+        padding: toRem(12) toRem(5);
+        line-height: 1.5;
+
+        &:not(:last-child) {
+            margin-bottom: toRem(20);
+        }
+    }
+}
