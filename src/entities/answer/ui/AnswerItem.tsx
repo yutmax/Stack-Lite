@@ -14,9 +14,11 @@ interface AnswerItemProps {
   answer: Answer;
   deleteAnswer: (answerId: number | string) => void;
   editAnswer: (answerId: number | string, content: string) => void;
+  isOwner?: boolean;
+  markAsCorrect?: (answerId: number | string, status: "correct" | "incorrect") => void;
 }
 
-const AnswerItem = ({ answer, deleteAnswer, editAnswer }: AnswerItemProps) => {
+const AnswerItem = ({ answer, deleteAnswer, editAnswer, isOwner: isOwnerQuestion, markAsCorrect }: AnswerItemProps) => {
   const user = useAppSelector(selectUser);
   const isOwner = user?.id === answer.user?.id;
 
@@ -43,6 +45,15 @@ const AnswerItem = ({ answer, deleteAnswer, editAnswer }: AnswerItemProps) => {
       setIsEdit(false);
     }
   };
+
+  const handleMarkAsCorrect = () => {
+    if (answer.id && !answer.isCorrect) {
+      markAsCorrect?.(answer.id, "correct");
+    } else if (answer.id && answer.isCorrect) {
+      markAsCorrect?.(answer.id, "incorrect");
+    }
+  };
+
   return (
     <div className="answer-item">
       <div className="answer-item__header">
@@ -55,17 +66,24 @@ const AnswerItem = ({ answer, deleteAnswer, editAnswer }: AnswerItemProps) => {
 
       {isOwner && (
         <div className="answer-item__owner-badge">
-          <IconButton onClick={toggleEdit} size="small" color="primary">
-            {isEdit ? <CancelIcon /> : <EditIcon />}
-          </IconButton>
-          {isEdit && (
-            <Button onClick={handleEditSave} variant="contained" color="primary" size="small" sx={{ textTransform: "none" }}>
-              Save
+          <div className="answer-item__actions">
+            <IconButton onClick={toggleEdit} size="small" color="primary">
+              {isEdit ? <CancelIcon /> : <EditIcon />}
+            </IconButton>
+            {isEdit && (
+              <Button onClick={handleEditSave} variant="contained" color="primary" size="small" sx={{ textTransform: "none" }}>
+                Save
+              </Button>
+            )}
+            <IconButton onClick={handleDelete} size="small">
+              <DeleteIcon color="error" />
+            </IconButton>
+          </div>
+          {isOwnerQuestion && (
+            <Button onClick={handleMarkAsCorrect} variant="outlined" size="small">
+              {answer.isCorrect ? "Unmark as Correct" : "Mark as Correct"}
             </Button>
           )}
-          <IconButton onClick={handleDelete} size="small">
-            <DeleteIcon color="error" />
-          </IconButton>
         </div>
       )}
     </div>

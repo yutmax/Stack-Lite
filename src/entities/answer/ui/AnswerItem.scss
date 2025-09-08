@@ -37,4 +37,14 @@
             margin-bottom: toRem(20);
         }
     }
+
+    &__owner-badge {
+        display: grid;
+        row-gap: toRem(20);
+        justify-items: start;
+    }
+    &__actions {
+        display: flex;
+        gap: toRem(8);
+    }
 }

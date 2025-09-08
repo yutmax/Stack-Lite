@@ -65,6 +65,29 @@ export function useAnswers(questionId?: number | string, isResolved?: boolean) {
       });
   }, []);
 
+  const markAsCorrect = useCallback(
+    (answerId: number | string, status: "correct" | "incorrect") => {
+      setLoading(true);
+      setError(null);
+      fetch(`/api/answers/${answerId}/state/${status}`, {
+        method: "PUT",
+        credentials: "include",
+      })
+        .then((res) => {
+          if (res.ok) {
+            fetchAnswers();
+          }
+        })
+        .catch((err) => {
+          setError(err.message || "Failed to update answer status");
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    },
+    [fetchAnswers]
+  );
+
   useEffect(() => {
     fetchAnswers();
   }, [fetchAnswers]);
@@ -76,5 +99,6 @@ export function useAnswers(questionId?: number | string, isResolved?: boolean) {
     deleteAnswer,
     refetch: fetchAnswers,
     editAnswer,
+    markAsCorrect,
   };
 }

@@ -14,9 +14,11 @@ interface AnswerseAccordionProps {
   answers: Answer[];
   deleteAnswer: (answerId: number | string) => void;
   editAnswer: (answerId: number | string, content: string) => void;
+  isOwner?: boolean;
+  markAsCorrect?: (answerId: number | string, status: "correct" | "incorrect") => void;
 }
 
-const AnswerseAccordion = ({ answers, deleteAnswer, editAnswer }: AnswerseAccordionProps) => {
+const AnswerseAccordion = ({ answers, deleteAnswer, editAnswer, isOwner, markAsCorrect }: AnswerseAccordionProps) => {
   const user = useAppSelector(selectUser);
 
   return (
@@ -30,7 +32,7 @@ const AnswerseAccordion = ({ answers, deleteAnswer, editAnswer }: AnswerseAccord
           <AccordionDetails>
             <div className="answers">
               {answers.map((answer) => (
-                <AnswerItem editAnswer={editAnswer} deleteAnswer={deleteAnswer} key={answer.id} answer={answer} />
+                <AnswerItem markAsCorrect={markAsCorrect} isOwner={isOwner} editAnswer={editAnswer} deleteAnswer={deleteAnswer} key={answer.id} answer={answer} />
               ))}
             </div>
           </AccordionDetails>
