@@ -13,9 +13,10 @@ import type { Answer } from "../../../features/question/types";
 interface AnswerseAccordionProps {
   answers: Answer[];
   deleteAnswer: (answerId: number | string) => void;
+  editAnswer: (answerId: number | string, content: string) => void;
 }
 
-const AnswerseAccordion = ({ answers, deleteAnswer }: AnswerseAccordionProps) => {
+const AnswerseAccordion = ({ answers, deleteAnswer, editAnswer }: AnswerseAccordionProps) => {
   const user = useAppSelector(selectUser);
 
   return (
@@ -29,7 +30,7 @@ const AnswerseAccordion = ({ answers, deleteAnswer }: AnswerseAccordionProps) =>
           <AccordionDetails>
             <div className="answers">
               {answers.map((answer) => (
-                <AnswerItem deleteAnswer={deleteAnswer} key={answer.id} answer={answer} />
+                <AnswerItem editAnswer={editAnswer} deleteAnswer={deleteAnswer} key={answer.id} answer={answer} />
               ))}
             </div>
           </AccordionDetails>

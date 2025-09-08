@@ -30,7 +30,7 @@ const QuestionItem = ({ question }: QuestionItemProps) => {
 
   const user = useSelector(selectUser);
   const navigate = useNavigate();
-  const { answers, loading, error, deleteAnswer, refetch } = useAnswers(question.id, question.isResolved);
+  const { answers, loading, error, deleteAnswer, refetch, editAnswer } = useAnswers(question.id, question.isResolved);
 
   const isOwner = user?.id === question.user.id;
 
@@ -89,7 +89,7 @@ const QuestionItem = ({ question }: QuestionItemProps) => {
       <PostAnswerBar refetch={refetch} questionId={question.id} />
       {deleteError && <ErrorMessage message={deleteError} />}
       {deleteSuccess && <SuccessMessage message="Question deleted successfully." />}
-      {question.answers.length > 0 && <AnswerseAccordion deleteAnswer={deleteAnswer} answers={answers} />}
+      {question.answers.length > 0 && <AnswerseAccordion editAnswer={editAnswer} deleteAnswer={deleteAnswer} answers={answers} />}
     </div>
   );
 };

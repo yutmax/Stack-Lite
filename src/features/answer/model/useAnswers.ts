@@ -21,7 +21,7 @@ export function useAnswers(questionId?: number | string, isResolved?: boolean) {
       })
       .catch((err) => setError(err.message || "Failed to load answers"))
       .finally(() => setLoading(false));
-  }, [questionId]);
+  }, [questionId, isResolved]);
 
   const deleteAnswer = useCallback((answerId: number | string) => {
     setLoading(true);
@@ -41,6 +41,30 @@ export function useAnswers(questionId?: number | string, isResolved?: boolean) {
       .finally(() => setLoading(false));
   }, []);
 
+  const editAnswer = useCallback((answerId: number | string, content: string) => {
+    setLoading(true);
+    setError(null);
+    fetch(`/api/answers/${answerId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ content }),
+      credentials: "include",
+    })
+      .then((res) => {
+        if (res.ok) {
+          setAnswers((prev) => prev.map((answer) => (answer.id === answerId ? { ...answer, content } : answer)));
+        }
+      })
+      .catch((err) => {
+        setError(err.message || "Failed to edit answer");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
   useEffect(() => {
     fetchAnswers();
   }, [fetchAnswers]);
@@ -51,5 +75,6 @@ export function useAnswers(questionId?: number | string, isResolved?: boolean) {
     error,
     deleteAnswer,
     refetch: fetchAnswers,
+    editAnswer,
   };
 }
