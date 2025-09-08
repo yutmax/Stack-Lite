@@ -19,11 +19,5 @@ export default defineConfig({
     globals: true,
     setupFiles: ["./src/setupTests.ts"],
     css: true,
-    coverage: {
-      provider: "v8",
-      reportsDirectory: "coverage",
-      reporter: ["text", "html", "lcov"],
-      exclude: ["src/main.tsx", "src/vite-env.d.ts"],
-    },
   },
 });
