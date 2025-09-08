@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "types": ["vitest", "node"],
+    "noEmit": true
+  },
+  "include": ["src", "src/**/*.test.ts", "src/**/*.test.tsx", "vitest.config.ts", "vite.config.ts", "src/test-env.d.ts"]
+}
